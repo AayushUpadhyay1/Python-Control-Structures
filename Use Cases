@@ -1,0 +1,46 @@
+# Automated Vending Machine Simulation
+'''
+Objective:
+Design a Python program to simulate a basic automated vending machine. The machine will 
+dispense items based on user inputs, and the program will use for and while loops, along 
+with break and continue statements, to control the flow of the vending process.
+'''
+while True:
+    print("=====WELCOME TO THE AUTOMATED VENDING MACHINE=====")
+    print("Enter A for Pepsi (2$)")                             #Printing the items available in the vending machine
+    print("Enter B for Coke (3$)")
+    print("Enter C for Red Bull (5$)")
+    print("Enter exit anytime to  exit or cancel transaction")
+    ch=input("Enter your choice: ")                           #Asking the user for choice
+    if ch.upper()=='A':
+        item='Pepsi'                                                           #Assigning values to item and cost variables    
+        cost=2
+    elif ch.upper()=='B':
+        item='Coke'
+        cost=3
+    elif ch.upper()=='C':
+        item='Red Bull'
+        cost=5
+    elif ch.lower()=='exit':
+        print("Exited.")                                                    #Exiting the program on user's choice
+        break
+    else:                   
+        print("Wrong input.")                                         #Printing 'Wrong input' if the user doesn't choose from the choices   
+    print(f"Please insert ${cost} ")    
+    m=input("Enter the amount inserted (in $): ") #Taking the amount in string so that if the user
+    if m.lower()=='exit':                                                 #types 'exit', the transaction could be cancelled
+        print("Transaction Cancelled.")
+        break
+    elif float(m)>=cost:                                                       #Converting the amount to float for camparison
+        print(f"Dispensing {item}. Your balance is ${float(m)-cost}")   #Printing the item dispensed and the balance amount
+    else:
+        while float(m)<cost:                                                #Checking if the inserted amount is less than the required amount
+            print(f"Insert ${cost-float(m)} more.")
+            n=input("Enter the amount inserted now (in $): ") #Taking the amount in string so that if the user
+            if n.lower()=='exit':                                                          #types 'exit', the transaction could be cancelled
+                print(f"Transaction Cancelled. ${float(m)} returned.") #Cancelling the transaction and returning the paid amount
+                break
+            else:
+                m=float(m)
+                m+=float(n)
+            print(f"Dispensing {item}. Your balance is ${float(m)-cost}")  #Printing the item dispensed and the balance amount
